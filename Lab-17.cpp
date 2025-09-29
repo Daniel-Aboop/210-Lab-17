@@ -49,7 +49,6 @@ int main() {
 
     // insert a node
     Node * current = head;
-    current = head;
     cout << "After which node to insert 10000? " << endl;
     int count = 1;
     while (current) {
@@ -83,14 +82,15 @@ void output(Node * hd) {
 Node * deletenode(Node * head,int entry){
  // traverse that many times and delete that node
     Node * current = head;
-    current = head;
-    Node *prev = head;
+    Node *prev = nullptr;
     for (int i = 0; i < (entry-1); i++)
-        if (i == 0)
+        if (i == 0){
+            prev=current;
             current = current->next;
+        }
         else {
-            current = current->next;
             prev = prev->next;
+            current = current->next;
         }
     // at this point, delete current and reroute pointers
     if (current) {  // checks for current to be valid before deleting the node
@@ -105,9 +105,9 @@ Node * insertnode(Node * head, int entry){
     Node * current=head;
     for (int i = 0; i < (entry); i++)
         if (i == 0)
-            current = current->next;
+            prev=current;
         else {
-            prev = current;
+            prev = prev->next;
             current = current->next;
         }
     //at this point, insert a node between prev and current
@@ -115,7 +115,13 @@ Node * insertnode(Node * head, int entry){
     newnode->value = 10000;
     newnode->next = current;
     prev->next = newnode;
-    return newnode;
+    if(prev){
+        prev->next=newnode;
+    }
+    else{
+        head=newnode;
+    }
+    return head;
 }
 Node * deletelist(Node * head){
 
