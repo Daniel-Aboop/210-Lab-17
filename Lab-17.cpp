@@ -17,7 +17,7 @@ Node* deletelist(Node * head);
 
 int main() {
     Node *head = nullptr;
-    int count = 0;
+    
     int entry;
     // create a linked list of size SIZE with random numbers 0-99
     for (int i = 0; i < SIZE; i++) {
@@ -46,44 +46,20 @@ int main() {
     cin >> entry;
     head=deletenode(head,entry);
     output(head);
+
     // insert a node
-    
+    Node * current = head;
     current = head;
     cout << "After which node to insert 10000? " << endl;
-    count = 1;
+    int count = 1;
     while (current) {
         cout << "[" << count++ << "] " << current->value << endl;
         current = current->next;
     }
     cout << "Choice --> ";
     cin >> entry;
-
-    current = head;
-    prev = head;
-    for (int i = 0; i < (entry); i++)
-        if (i == 0)
-            current = current->next;
-        else {
-            current = current->next;
-            prev = prev->next;
-        }
-    //at this point, insert a node between prev and current
-    Node * newnode = new Node;
-    newnode->value = 10000;
-    newnode->next = current;
-    prev->next = newnode;
-    output(head);
-
+    head=insertnode(current,entry);
     // deleting the linked list
-    current = head;
-    while (current) {
-        head = current->next;
-        delete current;
-        current = head;
-    }
-    head = nullptr;
-    output(head);
-
     return 0;
 }
 
@@ -121,6 +97,21 @@ Node* deletenode(Node * head,int entry){
     return head;
 }
 Node* insertnode(Node * head, int entry){
-    Node * current = head;
-
+    Node * prev;
+    Node * current;
+    current = head;
+    prev = head;
+    for (int i = 0; i < (entry); i++)
+        if (i == 0)
+            current = current->next;
+        else {
+            current = current->next;
+            prev = prev->next;
+        }
+    //at this point, insert a node between prev and current
+    Node * newnode = new Node;
+    newnode->value = 10000;
+    newnode->next = current;
+    prev->next = newnode;
+    return newnode;
 }
