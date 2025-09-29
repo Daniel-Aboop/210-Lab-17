@@ -9,34 +9,16 @@ struct Node {
 };
 
 void output(Node *);
+Node* deletenode(Node * head,int entry);
+Node* insertnode(Node * head);
+Node* deletelist(Node * head);
 
-Node* deletenode(Node * head,int entry){
-    // traverse that many times and delete that node
-    Node * current = head;
-    current = head;
-    Node *prev = head;
-    for (int i = 0; i < (entry-1); i++)
-        if (i == 0)
-            current = current->next;
-        else {
-            current = current->next;
-            prev = prev->next;
-        }
-    // at this point, delete current and reroute pointers
-    if (current) {  // checks for current to be valid before deleting the node
-        prev->next = current->next;
-        delete current;
-        current = nullptr;
-    }
-    output(head);
-    return head;
-}
-Node* insertnode(Node * head, )
+
 
 int main() {
     Node *head = nullptr;
     int count = 0;
-
+    int entry;
     // create a linked list of size SIZE with random numbers 0-99
     for (int i = 0; i < SIZE; i++) {
         int tmp_val = rand() % 100;
@@ -57,15 +39,15 @@ int main() {
     output(head);
 
     // deleting a node
-    Node * current = head;
+    
     cout << "Which node to delete? " << endl;
     output(head);
-    int entry;
     cout << "Choice --> ";
     cin >> entry;
     head=deletenode(head,entry);
-
+    output(head);
     // insert a node
+    
     current = head;
     cout << "After which node to insert 10000? " << endl;
     count = 1;
@@ -117,4 +99,28 @@ void output(Node * hd) {
         current = current->next;
     }
     cout << endl;
+}
+Node* deletenode(Node * head,int entry){
+ // traverse that many times and delete that node
+    Node * current = head;
+    current = head;
+    Node *prev = head;
+    for (int i = 0; i < (entry-1); i++)
+        if (i == 0)
+            current = current->next;
+        else {
+            current = current->next;
+            prev = prev->next;
+        }
+    // at this point, delete current and reroute pointers
+    if (current) {  // checks for current to be valid before deleting the node
+        prev->next = current->next;
+        delete current;
+        current = nullptr;
+    }
+    return head;
+}
+Node* insertnode(Node * head, int entry){
+    Node * current = head;
+
 }
