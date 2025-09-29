@@ -9,9 +9,9 @@ struct Node {
 };
 
 void output(Node *);
-Node* deletenode(Node * head,int entry);
-Node* insertnode(Node * head);
-Node* deletelist(Node * head);
+Node * deletenode(Node * head, int entry);
+Node * insertnode(Node * head, int entry);
+Node * deletelist(Node * head);
 
 
 
@@ -60,6 +60,8 @@ int main() {
     cin >> entry;
     head=insertnode(current,entry);
     // deleting the linked list
+    head=deletelist(head);
+    output(head);
     return 0;
 }
 
@@ -76,7 +78,7 @@ void output(Node * hd) {
     }
     cout << endl;
 }
-Node* deletenode(Node * head,int entry){
+Node * deletenode(Node * head,int entry){
  // traverse that many times and delete that node
     Node * current = head;
     current = head;
@@ -96,11 +98,9 @@ Node* deletenode(Node * head,int entry){
     }
     return head;
 }
-Node* insertnode(Node * head, int entry){
-    Node * prev;
-    Node * current;
-    current = head;
-    prev = head;
+Node * insertnode(Node * head, int entry){
+    Node * prev=nullptr;
+    Node * current=head;
     for (int i = 0; i < (entry); i++)
         if (i == 0)
             current = current->next;
@@ -114,4 +114,15 @@ Node* insertnode(Node * head, int entry){
     newnode->next = current;
     prev->next = newnode;
     return newnode;
+}
+Node * deletelist(Node * head){
+
+    Node * current = head;
+    while (current) {
+        head = current->next;
+        delete current;
+        current = head;
+    }
+    head = nullptr;
+    return head;
 }
