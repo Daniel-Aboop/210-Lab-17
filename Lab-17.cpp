@@ -10,6 +10,32 @@ struct Node {
 
 void output(Node *);
 
+void deletenode(Node *head,Node * current){
+     cout << "Which node to delete? " << endl;
+    output(head);
+    int entry;
+    cout << "Choice --> ";
+    cin >> entry;
+
+    // traverse that many times and delete that node
+    current = head;
+    Node *prev = head;
+    for (int i = 0; i < (entry-1); i++)
+        if (i == 0)
+            current = current->next;
+        else {
+            current = current->next;
+            prev = prev->next;
+        }
+    // at this point, delete current and reroute pointers
+    if (current) {  // checks for current to be valid before deleting the node
+        prev->next = current->next;
+        delete current;
+        current = nullptr;
+    }
+    output(head);
+}
+
 int main() {
     Node *head = nullptr;
     int count = 0;
@@ -34,6 +60,7 @@ int main() {
     output(head);
 
     // deleting a node
+    
     Node * current = head;
     cout << "Which node to delete? " << endl;
     output(head);
