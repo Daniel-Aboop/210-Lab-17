@@ -1,3 +1,6 @@
+// COMSC-210 | Lab 17 | Daniel Santisteban
+// IDE used: VS Code
+
 #include <iostream>
 using namespace std;
 
@@ -94,7 +97,12 @@ Node * deletenode(Node * head,int entry){
         }
     // at this point, delete current and reroute pointers
     if (current) {  // checks for current to be valid before deleting the node
+       if(prev){
         prev->next = current->next;
+       }
+       else{
+        head=current->next;
+       }
         delete current;
         current = nullptr;
     }
@@ -105,16 +113,15 @@ Node * insertnode(Node * head, int entry){
     Node * current=head;
     for (int i = 0; i < (entry); i++)
         if (i == 0)
-            prev=current;
+            current = current->next;
         else {
-            prev = prev->next;
+            prev=current;
             current = current->next;
         }
     //at this point, insert a node between prev and current
     Node * newnode = new Node;
     newnode->value = 10000;
     newnode->next = current;
-    prev->next = newnode;
     if(prev){
         prev->next=newnode;
     }
