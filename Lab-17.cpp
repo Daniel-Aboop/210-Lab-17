@@ -58,7 +58,9 @@ int main() {
     }
     cout << "Choice --> ";
     cin >> entry;
-    head=insertnode(current,entry);
+    head=insertnode(head,entry);
+    output(head);
+
     // deleting the linked list
     head=deletelist(head);
     output(head);
@@ -105,8 +107,8 @@ Node * insertnode(Node * head, int entry){
         if (i == 0)
             current = current->next;
         else {
+            prev = current;
             current = current->next;
-            prev = prev->next;
         }
     //at this point, insert a node between prev and current
     Node * newnode = new Node;
